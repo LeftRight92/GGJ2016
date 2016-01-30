@@ -18,7 +18,7 @@ public class LightingManager : MonoBehaviour {
 	void Update () {
 		if (flickerOn && flickerNow) {
 			float amount = Random.value;
-			foreach(FlickerLight f in flickerLights) f.flickerAmount = amount;
+			foreach(FlickerLight f in flickerLights) f.FlickerAmount = amount;
 			StartCoroutine(FlickerWait());
 		}
 
@@ -27,7 +27,7 @@ public class LightingManager : MonoBehaviour {
 	public void ToggleFlicker(){
 		flickerOn = !flickerOn;
 		if (!flickerOn) {
-			foreach(FlickerLight f in flickerLights) f.flickerAmount = 1f;
+			foreach(FlickerLight f in flickerLights) f.FlickerAmount = 1f;
 		}
 	}
 
