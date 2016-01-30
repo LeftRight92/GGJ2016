@@ -4,7 +4,7 @@ using System.Collections;
 public class LightningLight : MonoBehaviour {
 
 	private float maxIntensity;
-	private Light light;
+	private new Light light;
 
 	// Use this for initialization
 	void Start () {
