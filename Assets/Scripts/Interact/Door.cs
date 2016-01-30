@@ -7,11 +7,11 @@ namespace GGJ2016.Interact {
 #pragma warning disable 0649
 		[SerializeField]
 		private float closeAngle, openAngle;
-#pragma warning restore 0649
 		[SerializeField]
 		private float doorSpeed;
 		[SerializeField]
-		private bool open, moving;
+		private bool open, moving, flip;
+#pragma warning restore 0649
 
 		// Update is called once per frame
 		void Update() {
@@ -24,7 +24,8 @@ namespace GGJ2016.Interact {
 		}
 
 		void RotateToward(float angle) {
-			transform.parent.Rotate(Vector3.up, Mathf.Clamp(angle - transform.parent.eulerAngles.y, -doorSpeed, doorSpeed));
+			transform.parent.Rotate(Vector3.up, Mathf.Clamp(flip? (transform.parent.eulerAngles.y - angle) : (angle - transform.parent.eulerAngles.y), -doorSpeed, doorSpeed));
+			Debug.Log (angle - transform.parent.eulerAngles.y);
 			//transform.Rotate(Vector3.up, Mathf.Min(doorSpeed, Mathf.Abs(transform.eulerAngles.y - angle)));
 			if(angle == transform.eulerAngles.y) moving = false;
         }

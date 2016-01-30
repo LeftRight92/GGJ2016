@@ -50,19 +50,21 @@ namespace GGJ2016.Lighting {
 		}
 
 		public void DoLightning() {
+			Debug.Log ("hello");
 			StartCoroutine(Lightning());
 		}
 
 		IEnumerator Lightning() {
-			yield return Flash(0.05f);
-			yield return new WaitForSeconds(0.05f);
-			yield return Flash(0.05f);
-			yield return new WaitForSeconds(0.15f);
-			yield return Flash(0.05f);
-			yield return new WaitForSeconds(0.05f);
+			Debug.Log ("1");
+			yield return Flash (lightningLength);
+			yield return new WaitForSeconds (lightningLength);
+			yield return Flash (lightningLength);
+			yield return new WaitForSeconds (3 * lightningLength);
+			yield return Flash (lightningLength);
 		}
 
 		IEnumerator Flash(float length) {
+			Debug.Log ("2");
 			foreach(LightningLight l in lightningLights) l.DoLightning(length);
 			RenderSettings.ambientSkyColor = skyboxFlashColour;
 			RenderSettings.ambientEquatorColor = skyboxFlashColour * 0.5f;
