@@ -217,10 +217,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 		public void ToggleCursor(){
+#pragma warning disable 0162
 #if DEBUG
 			return;
 #endif
 			Cursor.visible = !Cursor.visible;
+#pragma warning restore 0162
 		}
     }
 }

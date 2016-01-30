@@ -17,7 +17,6 @@ namespace GGJ2016.Interact {
 				RaycastHit hit;
 				if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, distance) &&
 					hit.collider.transform.tag == "Interactable") {
-					Debug.Log(hit.collider.transform.name);
 					hit.collider.GetComponent<Interactable>().Interact();
 				}
 			}
