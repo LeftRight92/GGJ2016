@@ -2,6 +2,7 @@
 using System.Collections;
 
 namespace GGJ2016.Interact {
+	[RequireComponent(typeof(AudioSource))]
 	public class Door : Interactable {
 
 #pragma warning disable 0649
@@ -11,6 +12,10 @@ namespace GGJ2016.Interact {
 		private float doorSpeed;
 		[SerializeField]
 		private bool open, moving, flip;
+		[SerializeField]
+		private AudioClip[] doorOpenSounds;
+		[SerializeField]
+		private AudioClip[] doorCloseSounds;
 #pragma warning restore 0649
 
 		// Update is called once per frame
@@ -27,14 +32,24 @@ namespace GGJ2016.Interact {
 			transform.parent.Rotate(Vector3.up, Mathf.Clamp(flip? (transform.parent.eulerAngles.y - angle) : (angle - transform.parent.eulerAngles.y), -doorSpeed, doorSpeed));
 			Debug.Log (angle - transform.parent.eulerAngles.y);
 			//transform.Rotate(Vector3.up, Mathf.Min(doorSpeed, Mathf.Abs(transform.eulerAngles.y - angle)));
-			if(angle == transform.eulerAngles.y) moving = false;
+			if(angle == transform.eulerAngles.y) {
+				moving = false;
+				if(!open) {
+					GetComponent<AudioSource>().clip = doorCloseSounds[Random.Range(0, doorCloseSounds.Length)];
+					GetComponent<AudioSource>().Play();
+				}
+			}
         }
 
 		public override void Interact() {
 			StopAllCoroutines();
 			moving = true;
 			open = !open;
-			if(open) StartCoroutine(ShutLater());
+			if(open) {
+				GetComponent<AudioSource>().clip = doorOpenSounds[Random.Range(0, doorOpenSounds.Length)];
+				GetComponent<AudioSource>().Play();
+				StartCoroutine(ShutLater());
+			}
 		}
 
 		IEnumerator ShutLater() {
