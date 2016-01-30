@@ -45,6 +45,7 @@ namespace GGJ2016.Lighting {
 				}
 			}
 		}
+
 		IEnumerator Lights() {
 			isRunning = true;
 			while(on) {
