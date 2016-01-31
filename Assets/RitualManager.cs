@@ -29,13 +29,15 @@ public class RitualManager : MonoBehaviour {
 	}
 
 	public void NextObjective(){
-		prompt.ShowNext ();
 		state++;
+		if(state != 8) prompt.ShowNext ();
 		switch(state){
 		case 1:
 			shrine.tag = "Interactable";
 			break;
 		case 2:
+			TV.tag = "Interactable";
+			break;
 		case 3:
 			bookPickup.tag = "Interactable";
 			break;
@@ -53,7 +55,8 @@ public class RitualManager : MonoBehaviour {
 			break;
 		case 8:
 			//SOMETHING!
-			//Application.LoadLevel(nextLevel);
+			Application.LoadLevel(nextLevel);
+			Debug.Log("End of Game");
 			break;
 		case 9:
 			Debug.LogError ("Bad state value");
