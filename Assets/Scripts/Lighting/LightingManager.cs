@@ -33,7 +33,8 @@ namespace GGJ2016.Lighting {
 				foreach(FlickerLight f in flickerLights) f.FlickerAmount = amount;
 				StartCoroutine(FlickerWait());
 			}
-
+			if (Random.value < 0.001f)
+				DoLightning ();
 		}
 
 		public void ToggleFlicker() {
