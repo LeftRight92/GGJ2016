@@ -28,10 +28,17 @@ namespace GGJ2016.Lighting {
 
 		// Update is called once per frame
 		void Update() {
-			if(flickerOn && flickerNow) {
-				float amount = Random.value;
-				foreach(FlickerLight f in flickerLights) f.FlickerAmount = amount;
-				StartCoroutine(FlickerWait());
+			if (flickerOn) {
+				if (flickerNow) {
+					float amount = Random.value;
+					foreach (FlickerLight f in flickerLights)
+						f.FlickerAmount = amount;
+					StartCoroutine (FlickerWait ());
+				}
+				if (Random.value < 0.1f)
+					ToggleFlicker();
+			} else {
+				if(Random.value < 0.005f) ToggleFlicker();
 			}
 			if (Random.value < 0.001f)
 				DoLightning ();
